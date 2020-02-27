@@ -4,8 +4,8 @@ import matplotlib
 
 
 #down-MACD cross from down(after crossing is higher then signal)
-down = 0
-up = 1
+down = False
+up = True
 buy = 0
 sell = 1
 pas = 2
@@ -40,13 +40,13 @@ def find_cut(signals: list, macd: list):
 
 
 def decision(actualDay,nextDay, df):
-    if(actualDay[1] is down):
-        if df[actualDay[0]]["open"] < df[nextDay[0]]["open"]:
+    if(actualDay[1] is False):
+        if df.loc[actualDay[0]]["open"] < df.loc[nextDay[0]]["open"]:
             return buy
         else:
             return pas
     else:
-        if df[actualDay[0]]["open"] < df[nextDay[0]]["open"]:
+        if df.loc[actualDay[0]]["open"] < df.loc[nextDay[0]]["open"]:
             return sell
         else:
             return pas
@@ -85,8 +85,7 @@ def organiser(path: str):
     generate_MACD(data)
     generate_SIGNAL(data)
     draw_plot(data.loc[36:])
-    print(find_cut(data.loc[:, "SIGNAL"].tolist(), data.loc[:, "MACD"].tolist()))
-    x = data.loc[:, "SIGNAL"].tolist(), data.loc[:, "MACD"].tolist()
+    x = find_cut(data.loc[:, "SIGNAL"].tolist(), data.loc[:, "MACD"].tolist())
     for i in range(len(x)-1):
         print(decision(x[i],x[i+1],data))
 
