@@ -1,4 +1,4 @@
 # Numeryczne-SI
 
-#Dominik Kwiatkowski
-#Jakub Dębski
+# Dominik Kwiatkowski
+# Jakub Dębski
